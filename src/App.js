@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Formik } from "formik";
+import * as yup from "yup";
 import styled from "styled-components";
 import { useHeroSearcher } from "./hooks/useHeroes";
 import { FormControl } from "react-bootstrap";
+import Signup from "./components/Signup";
 // import { searchHeroesFromApi } from ".";
 
 //  TOKEN
@@ -16,7 +18,7 @@ function App() {
     return (
       <div>
         {hero.name}
-        <img src={hero.image?.url}></img>
+        <img src={hero.image.url}></img>
         {Object.entries(hero.powerstats).map((stat) => {
           const [key, value] = stat;
           return `${key.toUpperCase()} : ${value} `;
@@ -31,25 +33,14 @@ function App() {
 
   return (
     <>
-      <FormControl
-        placeholder="Username"
-        aria-label="Recipient's username"
-        aria-describedby="basic-addon2"
-      />
-      <FormControl
-        placeholder="Password"
-        aria-label="Recipient's username"
-        aria-describedby="basic-addon2"
-      />
-      <div></div>
+      <Signup />
+      <div>Separating inputs</div>
       <input type="text" value={value} onChange={handleChange}></input>
       <div>
-        {console.log(heroes)} What is happening{" "}
         {heroes &&
           heroes.map((hero) => {
             return buildHeroResult(hero);
           })}
-        {""}?{" "}
       </div>
     </>
   );
