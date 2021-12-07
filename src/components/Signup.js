@@ -3,6 +3,7 @@ import { Formik, Form, Field, useFormik } from "formik";
 import * as Yup from "yup";
 import axios, { Axios } from "axios";
 
+/*Forms allows us to send (POST) information to the server to create something.*/
 /* Formik is a library that allows us to deal with forms in React. When dealing 
 with forms in vanilla React there is three annoyances you have to deal with:
 -Getting data in and out of a form state.

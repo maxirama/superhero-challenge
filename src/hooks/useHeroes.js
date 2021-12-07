@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { searchResults } from "../index";
 
+/*
+  Use effect allows us to execute certain function (or functions) each time  that our component renders.
+*/
 const API_KEY = process.env.REACT_APP_API_KEY;
 const API_URL_NAME = `https://superheroapi.com/api.php/${API_KEY}/search/`;
 const API_URL_ID = `https://superheroapi.com/api.php/${API_KEY}/`;
