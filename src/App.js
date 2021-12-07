@@ -3,12 +3,13 @@ import axios from "axios";
 import { Formik } from "formik";
 import * as yup from "yup";
 import styled from "styled-components";
-import { useHeroSearcher } from "./hooks/useHeroes";
+import { useCharacterSearcher } from "./hooks/useCharacters";
 import { FormControl } from "react-bootstrap";
 import Signup from "./components/Signup";
 import { BrowserRouter, Link, Route, Switch } from "react-router";
 import Character from "./components/Character";
-// import { searchHeroesFromApi } from ".";
+import ListOfCharacters from "./components/ListOfCharacters";
+// import { searchcharacteresFromApi } from ".";
 
 //  TOKEN
 // Use PascalCase to declare components.
@@ -38,20 +39,13 @@ import Character from "./components/Character";
 //  so that HTML-like text can co-exist with JavaScript/React code.
 
 function App() {
-  const { heroes, searchResults } = useHeroSearcher();
+  const { characters, searchResults } = useCharacterSearcher();
   // States:
   //The state's hooks allows us to update the state of certain component.
   const [value, setValue] = useState();
 
-  const buildHeroResult = (hero) => {
-    return (
-      <Character
-        name={hero.name}
-        img={hero.image.url}
-        powerStats={Object.entries(hero.powerstats)}
-      />
-    );
-  };
+  // In react, when we make an element's list, each child must have an unique KEY.
+  //This allows react to identify in a list the elements that its rendering
 
   // Event handling function: we will use this function to specifie our  component
   // how to handle the input change event.
@@ -64,13 +58,9 @@ function App() {
       <Signup />
       <div>Separating inputs</div>
       <input type="text" value={value} onChange={handleChange}></input>
-      <div>
-        {heroes &&
-          heroes.map((hero) => {
-            return buildHeroResult(hero);
-          })}
-      </div>
+      <div>{<ListOfCharacters characters={characters} />}</div>
     </>
   );
 }
+
 export default App;

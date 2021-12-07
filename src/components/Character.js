@@ -1,5 +1,6 @@
 import React from "react";
 
+// powerStats prop is an array of arrays maped by Object.entries method.
 const Character = ({ name, powerStats, img }) => {
   return (
     <div>
