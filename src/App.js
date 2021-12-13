@@ -42,7 +42,7 @@ function App() {
   const { characters, searchResults } = useCharacterSearcher();
   // States:
   //The state's hooks allows us to update the state of certain component.
-  const [value, setValue] = useState();
+  const [searchValue, setSearchValue] = useState();
 
   // In react, when we make an element's list, each child must have an unique KEY.
   //This allows react to identify in a list the elements that its rendering
@@ -53,11 +53,13 @@ function App() {
     searchResults(e.target.value);
   };
 
+  // We need to set the routes and the pages right here, at the main App.
+  // Our app file structure will be the following: pages/page-name/page-components.
   return (
     <>
       <Signup />
       <div>Separating inputs</div>
-      <input type="text" value={value} onChange={handleChange}></input>
+      <input type="text" value={searchValue} onChange={handleChange}></input>
       <div>{<ListOfCharacters characters={characters} />}</div>
     </>
   );
