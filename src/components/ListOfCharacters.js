@@ -1,7 +1,11 @@
 import React from "react";
+import { useState } from "react";
 import Character from "./Character";
 
 const ListOfCharacters = ({ characters }) => {
+  const [heroTeam, setHeroTeam] = useState({});
+
+  const checkHeroes = () => {};
   const buildCharacterResult = (character) => {
     return (
       <Character

@@ -9,6 +9,7 @@ import searchCharactersFromApi from "../services/searchCharactersFromApi";
 */
 
 export const useCharacterSearcher = () => {
+  // useState = [value, updateValue];
   const [characters, setCharacters] = useState([]);
 
   const searchResults = (value) => {

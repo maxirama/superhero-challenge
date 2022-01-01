@@ -17,7 +17,8 @@ Formik put all this things togheter in a very very simple and less verbose way.
 */
 
 const TOKEN_URL = "http://challenge-react.alkemy.org/";
-export default function Signup() {
+export default function Login() {
+  console.log();
   const SignupSchema = Yup.object().shape({
     email: Yup.string().email("Introduce a valid email").required("Required"),
     password: Yup.string()
@@ -26,8 +27,8 @@ export default function Signup() {
       .required("Required"),
   });
 
-  const getToken = (credential) => {
-    return axios.post(TOKEN_URL, credential);
+  const getToken = (credentials) => {
+    return axios.post(TOKEN_URL, credentials);
   };
 
   const saveToken = (request) => {
