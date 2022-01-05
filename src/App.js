@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Context from "./context/AuthContext";
-
+import Menu from "./components/Navbar";
 // Imports:
 //  Default => Same name as the default export
 //  {ImportOne, ImportTwo} (Naming import) => More than one export from the file
@@ -36,9 +36,10 @@ function App() {
         {/* Context provider wraps our Pages, so the pages can access to the Context props */}
         <Context.Provider value={localStorage.superHeroToken}>
           {/* Routes also wraps our pages, so the children can use React Router functionalitys. */}
+          <Menu></Menu>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Context.Provider>
       </BrowserRouter>

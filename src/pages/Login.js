@@ -2,6 +2,8 @@ import React from "react";
 import { Formik, Form, Field, useFormik } from "formik";
 import * as Yup from "yup";
 import axios, { Axios } from "axios";
+import Menu from "../components/Navbar.js";
+import { Container, Row, Col, Stack } from "react-bootstrap";
 
 /*Forms allows us to send (POST) information to the server to create something.*/
 /* Formik is a library that allows us to deal with forms in React. When dealing 
@@ -18,7 +20,6 @@ Formik put all this things togheter in a very very simple and less verbose way.
 
 const TOKEN_URL = "http://challenge-react.alkemy.org/";
 export default function Login() {
-  console.log();
   const SignupSchema = Yup.object().shape({
     email: Yup.string().email("Introduce a valid email").required("Required"),
     password: Yup.string()
@@ -44,8 +45,10 @@ export default function Login() {
       });
   };
 
+  // Agregar logica de redireccion al submittear validamente
+
   return (
-    <div>
+    <Container>
       <Formik
         initialValues={{
           email: "",
@@ -61,17 +64,37 @@ export default function Login() {
         // Bind values to the HTML forms.
       >
         {({ errors, touched }) => (
-          <Form>
-            <Field name="email" />
-            {errors.email && touched.email ? <div>{errors.email}</div> : null}
-            <Field name="password" />
-            {errors.password && touched.password ? (
-              <div>{errors.password}</div>
-            ) : null}
-            <button type="submit">Submit</button>
-          </Form>
+          <Stack gap={4} className="col-md-4 mx-auto">
+            <h1 className="py-2">Login</h1>
+            <Form>
+              <div>
+                <label className="d-block" htmlFor="email">
+                  Email{" "}
+                </label>
+                <Field name="email" />
+                <div>
+                  {errors.email && touched.email ? (
+                    <div className="text-danger">{errors.email}</div>
+                  ) : null}
+                </div>
+              </div>
+              <div>
+                <label className="d-block" htmlFor="password">
+                  Password{" "}
+                </label>
+                <Field name="password" />
+                {errors.password && touched.password ? (
+                  <div className="text-danger">{errors.password}</div>
+                ) : null}
+              </div>
+
+              <button className="btn btn-primary my-3" type="submit">
+                Submit
+              </button>
+            </Form>
+          </Stack>
         )}
       </Formik>
-    </div>
+    </Container>
   );
 }
