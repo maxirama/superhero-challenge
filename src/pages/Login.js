@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import axios, { Axios } from "axios";
 import Menu from "../components/Navbar.js";
 import { Container, Row, Col, Stack } from "react-bootstrap";
+import { Navigate } from "react-router-dom";
 
 /*Forms allows us to send (POST) information to the server to create something.*/
 /* Formik is a library that allows us to deal with forms in React. When dealing 
@@ -60,6 +61,7 @@ export default function Login() {
             Save the TOKEN in the local storage in this function.
           */
           saveToken(getToken(values));
+          return <Navigate to="/home" />;
         }}
         // Bind values to the HTML forms.
       >

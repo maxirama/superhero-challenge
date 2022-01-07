@@ -1,22 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import Character from "./Character";
-import Button from "./Button";
+import { Row } from "react-bootstrap";
 
-const ListOfCharacters = ({ characters, onClick }) => {
+const ListOfCharacters = ({ characters, onClick, addMember }) => {
   /* For our requirements, the hero/villains team must be in balance:
   3 good and 3 evil, so each time before we try to add a Hero, we must
   check it doesnt unbalance our team.
   */
-
-  // checkAlignmentBalance = (heroes) => {
-  // //   let good = 0;
-  // //   let evil = 0;
-
-  // //   heroes.forEach({hero}=>{
-
-  // //   })
-  // // };
 
   const buildCharacterResult = (character) => {
     return (
@@ -27,19 +18,22 @@ const ListOfCharacters = ({ characters, onClick }) => {
           img={character.image.url}
           powerStats={Object.entries(character.powerstats)}
           alignment={character.biography.alignment}
+          addMember={() => {
+            // if (isTeamFull() && isTeamBalanced()) {
+            addMember(character);
+          }}
         />
-        <Button text="Add to Team" onClick={onClick}></Button>
       </>
     );
   };
 
   return (
-    <div>
+    <Row className="mx-1">
       {characters &&
         characters.map((character) => {
           return buildCharacterResult(character);
         })}
-    </div>
+    </Row>
   );
 };
 
