@@ -4,6 +4,7 @@ import Searcher from "./pages/Searcher";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Context from "./context/AuthContext";
 import Menu from "./components/Navbar";
+import Home from "./pages/Home";
 import "./App.css";
 
 // TODO : Redirect to previous path once our Credentials were correctly introduced.
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/searcher" element={<Searcher />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         </Context.Provider>
       </BrowserRouter>

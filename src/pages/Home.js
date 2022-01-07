@@ -1,14 +1,17 @@
 import React from "react";
 import ListOfCharacters from "../components/ListOfCharacters";
+import { Container } from "react-bootstrap";
 import Context from "../context/AuthContext";
 
 function Home() {
   return (
     <>
-      <h1>Blabla</h1>
-      <ListOfCharacters
-        characters={JSON.parse(localStorage.getItem("heroTeam"))}
-      ></ListOfCharacters>
+      <Container className="my-3">
+        <h1>Your Team</h1>
+        <ListOfCharacters
+          characters={JSON.parse(localStorage.getItem("heroTeam"))}
+        ></ListOfCharacters>
+      </Container>
     </>
   );
 }

@@ -57,8 +57,23 @@ function Searcher() {
     return team.length < 6;
   };
 
+  const isAlreadyOnTeam = (character) => {
+    let repeatedCharacter = false;
+    const id = character.id;
+    team.forEach((character) => {
+      if (character.id === id) {
+        repeatedCharacter = true;
+      }
+    });
+    return repeatedCharacter;
+  };
+
   const addMember = (character) => {
-    if (isTeamSlotFree() && isTeamBalanced(character)) {
+    if (
+      isTeamSlotFree() &&
+      isTeamBalanced(character) &&
+      !isAlreadyOnTeam(character)
+    ) {
       setTeam([...team, character]);
     }
   };
@@ -95,6 +110,7 @@ function Searcher() {
           {
             <ListOfCharacters
               characters={JSON.parse(localStorage.getItem("heroTeam"))}
+              teamList={true}
             />
           }
         </div>
@@ -106,7 +122,13 @@ function Searcher() {
         </p>
         <input type="text" value={searchValue} onChange={handleChange}></input>
         <div>
-          {<ListOfCharacters characters={characters} addMember={addMember} />}
+          {
+            <ListOfCharacters
+              characters={characters}
+              teamList={false}
+              addMember={addMember}
+            />
+          }
         </div>
       </Container>
     );
