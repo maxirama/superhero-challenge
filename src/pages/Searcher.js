@@ -9,10 +9,6 @@ import Context from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-// import { searchcharacteresFromApi } from ".";
-
-// };
-
 // JSX is an HTML-like syntax used by React that extends ECMAScript
 //  so that HTML-like text  can co-exist with JavaScript/React code.
 
@@ -21,7 +17,9 @@ function Searcher() {
   const [team, setTeam] = useState(
     JSON.parse(localStorage.getItem("heroTeam") || [])
   );
-  const [showPreview, setShowPreview] = useState(true);
+  // saveStatus: false === not saved , true === saved.
+  const [saveStatus, setSaveStatus] = useState(false);
+  // const [showDetails, setShowDetails] = useState(false);
   // States:
   //The state's hooks allows us to update the state of certain component.
   const [searchValue, setSearchValue] = useState();
@@ -70,6 +68,9 @@ function Searcher() {
     return repeatedCharacter;
   };
 
+  // Check how to avoid the cloudfare
+
+  // We will pass the three following functions to the child components by drilling. (AddMember, deleteMember, showDetails)
   const addMember = (character) => {
     if (
       isTeamSlotFree() &&
@@ -77,16 +78,34 @@ function Searcher() {
       !isAlreadyOnTeam(character)
     ) {
       setTeam([...team, character]);
+      localStorage.setItem("heroTeam", JSON.stringify(team));
+      setSaveStatus(false);
     }
   };
+
+  const deleteMember = (character) => {
+    const id = character.id;
+    setTeam(
+      team.filter((character) => {
+        return character.id !== id;
+      })
+    );
+    localStorage.setItem("heroTeam", JSON.stringify(team));
+  };
+
+  // const showHeroDetails = (character) => {
+  //   console.log(showDetails);
+  //   setShowDetails(!showDetails);
+  // };
 
   const handleChange = (e) => {
     searchResults(e.target.value);
   };
 
-  const handlePreviewClick = (e) => {
-    setShowPreview(!showPreview);
-  };
+  // const handlePreviewClick = (e) => {
+  //   setShowPreview(!showPreview);
+  // };
+
   //To Do: Pop up de falta de permisos / redireccion
   // Check if user is logged in:
   const auth = useContext(Context);
@@ -99,6 +118,7 @@ function Searcher() {
   // JSON.parse does the opposite, converts an string into an object.
   const handleClick = (e) => {
     localStorage.setItem("heroTeam", JSON.stringify(team));
+    setSaveStatus(true);
   };
 
   // We need to set the routes and the pages right here, at the main App.
@@ -108,16 +128,35 @@ function Searcher() {
   if (auth) {
     return (
       <Container className="my-2">
-        <Container className="d-flex flex-row py-3">
-          <h2>Team Preview</h2>{" "}
-          <Button className="mx-3" onClick={handleClick}>
-            Save Changes
-          </Button>
+        <h1 className="text-center py-3"> Team Builder</h1>
+        <Container>
+          <Container className="d-flex flex-row py-3">
+            <h2>Team Preview</h2>{" "}
+            <Button className="mx-3" onClick={handleClick}>
+              Save Changes
+            </Button>
+          </Container>
+          <Container className="mx-4 ">
+            {saveStatus ? (
+              <span className="text-success">Changes Saved!</span>
+            ) : (
+              <span className="text-danger">Changes Unsaved!</span>
+            )}
+          </Container>
         </Container>
+
         {/* Add useEffect to re-render preview each time a hero is added to the team */}
-        <div>{<ListOfCharacters characters={team} teamList={true} />}</div>
-        <Container className="d-flex flex-row my-3">
-          <h2>Team Builder</h2>
+        <div>
+          {
+            <ListOfCharacters
+              characters={team}
+              teamList={true}
+              deleteMember={deleteMember}
+            />
+          }
+        </div>
+        <Container className="d-flex flex-row py-3 mx-2 my-2">
+          <h2>Search Superheroes</h2>
         </Container>
         <Container className="mx-2">
           <p>

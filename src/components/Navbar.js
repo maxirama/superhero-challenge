@@ -6,12 +6,7 @@ import Context from "../context/AuthContext";
 
 export const Menu = () => {
   const auth = useContext(Context);
-  // Conditional rendering with auth context
-  // const Log = () => {
-  //   return (
 
-  //   )
-  // }
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="text-light">
       <Container>
@@ -23,7 +18,7 @@ export const Menu = () => {
               <Link to="/home">Home</Link>
             </Nav.Link>
             <Nav.Link href="#">
-              <Link to="/searcher">Searcher</Link>
+              <Link to="/searcher">Search</Link>
             </Nav.Link>
             <Nav.Link href="#">
               {auth ? (
@@ -40,33 +35,3 @@ export const Menu = () => {
 };
 
 export default Menu;
-
-// <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-//   <a href="#" class="navbar-brand">
-//     {" "}
-//     SuperHero Teams
-//   </a>
-//   <button
-//     class="navbar-toggler"
-//     type="button"
-//     data-bs-toggle="collapse"
-//     data-bs-target="#navmenu"
-//   >
-//     <span class="navbar-toggler-icon"></span>
-//   </button>
-
-//   <div class="collapse navbar-collapse" id="navmenu">
-//     <ul class="navbar-nav ms-auto">
-//       <li class="nav-item">
-//         <a href="/" class="nav-link">
-//           Searcher
-//         </a>
-//       </li>
-//       <li class="nav-item">
-//         <a href="/home" class="nav-link">
-//           My Team
-//         </a>
-//       </li>
-//     </ul>
-//   </div>
-// </nav>

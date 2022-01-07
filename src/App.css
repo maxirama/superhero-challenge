@@ -1,4 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;400&display=swap");
 a {
   text-decoration: none !important;
   color: inherit !important;
+}
+
+* {
+  font-family: "Titillium Web", sans-serif;
 }

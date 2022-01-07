@@ -3,9 +3,34 @@ import { useState } from "react";
 import Character from "./Character";
 import { Row } from "react-bootstrap";
 
-const ListOfCharacters = ({ characters, onClick, addMember, teamList }) => {
+const ListOfCharacters = ({
+  characters,
+  onClick,
+  addMember,
+  deleteMember,
+  showHeroDetails,
+  teamMember,
+  teamList,
+  // showDetails,
+}) => {
   // Renderizes our characters.
+
+  // ● Peso.
+  // ● Altura.
+  // ● Nombre.
+  // ● Alias.
+  // ● Color de ojos.
+  // ● Color de cabello.
+  // ● Lugar de trabajo
   const buildCharacter = (character, teamMember) => {
+    const details = {
+      alias: character.biography.aliases[0],
+      height: character.appearance.height[0],
+      weight: character.appearance.weight[0],
+      eyes: character.appearance["eye-color"],
+      hair: character.appearance["hair-color"],
+      workplace: character.work.base.split(" ")[0],
+    };
     return (
       <Character
         id={character.id}
@@ -13,11 +38,19 @@ const ListOfCharacters = ({ characters, onClick, addMember, teamList }) => {
         img={character.image.url}
         powerStats={Object.entries(character.powerstats)}
         alignment={character.biography.alignment}
+        details={Object.entries(details)}
         addMember={() => {
           addMember(character);
         }}
+        deleteMember={() => {
+          deleteMember(character);
+        }}
+        showHeroDetails={() => {
+          showHeroDetails(character);
+        }}
         teamMember={teamMember}
         biography={character.biography}
+        // showDetails={showDetails}
       />
     );
   };
@@ -41,7 +74,6 @@ const ListOfCharacters = ({ characters, onClick, addMember, teamList }) => {
         isInTeam = true;
       }
     });
-    console.log(`${id} is in team?`);
     return isInTeam;
   };
 
