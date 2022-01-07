@@ -18,8 +18,10 @@ import { Button } from "react-bootstrap";
 
 function Searcher() {
   const { characters, searchResults } = useCharacterSearcher();
-  const [team, setTeam] = useState([]);
-
+  const [team, setTeam] = useState(
+    JSON.parse(localStorage.getItem("heroTeam") || [])
+  );
+  const [showPreview, setShowPreview] = useState(true);
   // States:
   //The state's hooks allows us to update the state of certain component.
   const [searchValue, setSearchValue] = useState();
@@ -82,11 +84,14 @@ function Searcher() {
     searchResults(e.target.value);
   };
 
+  const handlePreviewClick = (e) => {
+    setShowPreview(!showPreview);
+  };
   //To Do: Pop up de falta de permisos / redireccion
   // Check if user is logged in:
   const auth = useContext(Context);
   if (!auth) {
-    return <Navigate to="login" />;
+    return <Navigate to="/login" />;
   }
 
   // Read about Json stringify / Json parse
@@ -106,17 +111,11 @@ function Searcher() {
         <Container className="d-flex flex-row py-3">
           <h2>Team Preview</h2>{" "}
           <Button className="mx-3" onClick={handleClick}>
-            Save Team
+            Save Changes
           </Button>
         </Container>
-        <div>
-          {
-            <ListOfCharacters
-              characters={JSON.parse(localStorage.getItem("heroTeam"))}
-              teamList={true}
-            />
-          }
-        </div>
+        {/* Add useEffect to re-render preview each time a hero is added to the team */}
+        <div>{<ListOfCharacters characters={team} teamList={true} />}</div>
         <Container className="d-flex flex-row my-3">
           <h2>Team Builder</h2>
         </Container>
@@ -127,8 +126,10 @@ function Searcher() {
             only have three characters from each band, and a maximum of 6
             characters in your team.
           </p>
-          <Container className="d-flex">
-            <label htmlFor="heroSearcher">Search for a Hero!</label>
+          <Container className="d-flex justify-content-center my-2">
+            <label className="mx-2" htmlFor="heroSearcher">
+              Search for a Hero
+            </label>
             <input
               type="text"
               name="heroSearcher"

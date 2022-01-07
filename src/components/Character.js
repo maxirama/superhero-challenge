@@ -33,7 +33,7 @@ const Character = ({
           {powerStats.map((stat) => {
             const [key, value] = stat;
             return (
-              <Container className="d-flex justify-content-between">
+              <Container className="d-flex justify-content-between py-1">
                 <span>{`${key[0].toUpperCase()}${key.substring(1)}`}</span>{" "}
                 <span>{`${value}`}</span>
               </Container>
@@ -41,11 +41,11 @@ const Character = ({
           })}
         </div>
 
-        <Container className="d-flex justify-content-between my-2 px-2">
-          <Button className="py-2 px-3" variant="secondary">
+        <Container className="d-flex justify-content-between mt-3 px-2">
+          <Button className="py-2 px-4" variant="secondary">
             Details
           </Button>
-          <Button className="py-2 px-3" variant="danger" onClick={onClick}>
+          <Button className="py-2 px-4" variant="danger" onClick={onClick}>
             Delete
           </Button>
         </Container>
@@ -64,20 +64,24 @@ const Character = ({
     >
       <Card.Img variant="top" src={img} />
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title className="text-center">{name}</Card.Title>
         <div>
           {powerStats.map((stat) => {
             const [key, value] = stat;
             return (
-              <Container className="d-flex justify-content-between">
+              <Container className="d-flex justify-content-between py-1">
                 <span>{`${key[0].toUpperCase()}${key.substring(1)}`}</span>{" "}
                 <span>{`${value}`}</span>
               </Container>
             );
           })}
         </div>
-        <Container className="d-flex justify-content-center my-2">
-          <Button className="py-2 px-3" variant="primary" onClick={handleClick}>
+        <Container className="d-flex justify-content-center mt-3">
+          <Button
+            className="py-2 px-3 my-2"
+            variant="primary"
+            onClick={handleClick}
+          >
             Add to team
           </Button>
         </Container>

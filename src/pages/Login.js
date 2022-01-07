@@ -63,7 +63,6 @@ export default function Login() {
             Save the TOKEN in the local storage in this function.
           */
           saveToken(getToken(values));
-          return <Navigate to="/home" />;
         }}
         // Bind values to the HTML forms.
       >
