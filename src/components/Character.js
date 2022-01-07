@@ -60,7 +60,7 @@ const Character = ({
   const nonSelectedHero = (
     <Card
       style={{ width: "18em" }}
-      className={`${border} my-2 mx-2 p-2 shadow-sm`}
+      className={`${border} my-2 mx-2 p-2 shadow-lg`}
     >
       <Card.Img variant="top" src={img} />
       <Card.Body>

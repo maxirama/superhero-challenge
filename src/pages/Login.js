@@ -19,6 +19,8 @@ Formik put all this things togheter in a very very simple and less verbose way.
 
 */
 
+//  TO DO : change EMAIL/PASSWORDS for icons
+// TO DO : Solve the input boxes problem
 const TOKEN_URL = "http://challenge-react.alkemy.org/";
 export default function Login() {
   const SignupSchema = Yup.object().shape({
@@ -49,7 +51,7 @@ export default function Login() {
   // Agregar logica de redireccion al submittear validamente
 
   return (
-    <Container>
+    <Container className="text-center my-3">
       <Formik
         initialValues={{
           email: "",
@@ -66,31 +68,36 @@ export default function Login() {
         // Bind values to the HTML forms.
       >
         {({ errors, touched }) => (
-          <Stack gap={4} className="col-md-4 mx-auto">
-            <h1 className="py-2">Login</h1>
+          <Stack
+            gap={4}
+            className=" my-5 col-md-4 mx-auto shadow-lg border rounded"
+          >
+            <h1 className="my-2">Login</h1>
             <Form>
-              <div>
-                <label className="d-block" htmlFor="email">
+              <Container className="d-flex justify-content-center mx-2  py-1">
+                <label className="d-block mx-2 px-3" htmlFor="email">
                   Email{" "}
                 </label>
-                <Field name="email" />
-                <div>
+                <div className="">
+                  <Field className="" name="email" />
                   {errors.email && touched.email ? (
-                    <div className="text-danger">{errors.email}</div>
+                    <div className="text-danger mx-2">{errors.email}</div>
                   ) : null}
                 </div>
-              </div>
-              <div>
-                <label className="d-block" htmlFor="password">
+              </Container>
+              <Container className="d-flex justify-content-center mx-2 py-1">
+                <label className="d-block mx-2" htmlFor="password">
                   Password{" "}
                 </label>
-                <Field name="password" />
-                {errors.password && touched.password ? (
-                  <div className="text-danger">{errors.password}</div>
-                ) : null}
-              </div>
+                <div className="">
+                  <Field className="" name="password" />
+                  {errors.password && touched.password ? (
+                    <div className="text-danger mx-2">{errors.password}</div>
+                  ) : null}
+                </div>
+              </Container>
 
-              <button className="btn btn-primary my-3" type="submit">
+              <button className="btn btn-primary my-4 px-5" type="submit">
                 Submit
               </button>
             </Form>

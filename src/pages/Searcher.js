@@ -117,19 +117,18 @@ function Searcher() {
             />
           }
         </div>
-        <Container className="d-flex flex-row py-3">
+        <Container className="d-flex flex-row my-3">
           <h2>Team Builder</h2>
         </Container>
-        <Container className="mx-2 p-2 my-2">
+        <Container className="mx-2">
           <p>
             {" "}
             Select your favourite character and add it to your team! You can
-            only have three characters from each band.
+            only have three characters from each band, and a maximum of 6
+            characters in your team.
           </p>
           <Container className="d-flex">
-            <label className="d-block mx-2" htmlFor="heroSearcher">
-              Search for a Hero!
-            </label>
+            <label htmlFor="heroSearcher">Search for a Hero!</label>
             <input
               type="text"
               name="heroSearcher"
