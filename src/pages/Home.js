@@ -9,6 +9,7 @@ function Home() {
       <Container className="my-3">
         <h1>Your Team</h1>
         <ListOfCharacters
+          teamList={true}
           characters={JSON.parse(localStorage.getItem("heroTeam"))}
         ></ListOfCharacters>
       </Container>

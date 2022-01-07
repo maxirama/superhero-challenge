@@ -5,7 +5,7 @@ import { Row } from "react-bootstrap";
 
 const ListOfCharacters = ({ characters, onClick, addMember, teamList }) => {
   // Renderizes our characters.
-  const buildCharacter = (character) => {
+  const buildCharacter = (character, teamMember) => {
     return (
       <Character
         id={character.id}
@@ -16,15 +16,18 @@ const ListOfCharacters = ({ characters, onClick, addMember, teamList }) => {
         addMember={() => {
           addMember(character);
         }}
+        teamMember={teamMember}
+        biography={character.biography}
       />
     );
   };
+
   if (teamList) {
     return (
-      <Row className="mx-1">
+      <Row className="mx-1 d-flex justify-content-center">
         {characters &&
           characters.map((character) => {
-            return buildCharacter(character);
+            return buildCharacter(character, true);
           })}
       </Row>
     );
@@ -54,10 +57,10 @@ const ListOfCharacters = ({ characters, onClick, addMember, teamList }) => {
   //If the list of characters we are working with doesnt belongs to a team list, render this
   if (!teamList) {
     return (
-      <Row className="mx-1">
+      <Row className="mx-1 d-flex justify-content-center">
         {characters &&
           unselectedCharacters().map((character) => {
-            return buildCharacter(character);
+            return buildCharacter(character, false);
           })}
       </Row>
     );

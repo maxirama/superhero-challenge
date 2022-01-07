@@ -103,9 +103,12 @@ function Searcher() {
   if (auth) {
     return (
       <Container className="my-2">
-        <div>
-          <h2>Team Preview</h2> <Button onClick={handleClick}>Save Team</Button>
-        </div>
+        <Container className="d-flex flex-row py-3">
+          <h2>Team Preview</h2>{" "}
+          <Button className="mx-3" onClick={handleClick}>
+            Save Team
+          </Button>
+        </Container>
         <div>
           {
             <ListOfCharacters
@@ -114,14 +117,28 @@ function Searcher() {
             />
           }
         </div>
-        <h2>Team Builder</h2>
-        <p>
-          {" "}
-          Search for your favourite heroes or villains and add them to your
-          team! You can only have three characters from each band.
-        </p>
-        <input type="text" value={searchValue} onChange={handleChange}></input>
-        <div>
+        <Container className="d-flex flex-row py-3">
+          <h2>Team Builder</h2>
+        </Container>
+        <Container className="mx-2 p-2 my-2">
+          <p>
+            {" "}
+            Select your favourite character and add it to your team! You can
+            only have three characters from each band.
+          </p>
+          <Container className="d-flex">
+            <label className="d-block mx-2" htmlFor="heroSearcher">
+              Search for a Hero!
+            </label>
+            <input
+              type="text"
+              name="heroSearcher"
+              value={searchValue}
+              onChange={handleChange}
+            ></input>
+          </Container>
+        </Container>
+        <Container className="d-flex justify-content-center">
           {
             <ListOfCharacters
               characters={characters}
@@ -129,7 +146,7 @@ function Searcher() {
               addMember={addMember}
             />
           }
-        </div>
+        </Container>
       </Container>
     );
   }
