@@ -13,38 +13,22 @@ const Character = ({
   teamMember,
   biography,
   details,
-  showHeroDetails,
 }) => {
   const [showDetails, setShowDetails] = useState(false);
 
+  // Adds a hero to the team
   const handleAddClick = (e) => {
     addMember();
   };
 
+  // Deletes a hero from the team
   const handleDeleteClick = (e) => {
     deleteMember();
   };
 
+  // Switch from stats display to details display
   const handleDetailsClick = (e) => {
     setShowDetails(!showDetails);
-  };
-
-  const heroDetails = () => {
-    const heroDetails = [];
-    for (const detail in details) {
-      heroDetails.push(
-        <Container className="d-flex justify-content-between py-1">
-          <span>
-            {` 
-            ${detail[0].toLocaleUpperCase}${detail.substring(1)}
-            `}
-          </span>
-          ;
-        </Container>
-      );
-    }
-    console.log(heroDetails);
-    return heroDetails;
   };
 
   // Conditional rendering to show the alignment of the hero.
@@ -53,6 +37,7 @@ const Character = ({
       ? "border rounded border-success"
       : "border rounded border-danger";
 
+  // Card that shows the member of the team and his stats.
   const memberStats = (
     <Card
       style={{ width: "18em" }}
@@ -93,6 +78,7 @@ const Character = ({
     </Card>
   );
 
+  // Card that shows the member of the team and his details
   const memberDetails = (
     <Card
       style={{ width: "18em" }}
@@ -132,15 +118,14 @@ const Character = ({
       </Card.Body>
     </Card>
   );
-  // const selectedHeroDetails = (
 
-  // )
-
+  // Conditional rendering: depending the state of show details, the card will change his display.
   if (teamMember) {
     const memberDisplay = showDetails ? memberDetails : memberStats;
     return memberDisplay;
   }
 
+  // Card that belongs to a search result (a character that is not added to the team yet.)
   const nonTeamMember = (
     <Card
       style={{ width: "18em" }}

@@ -15,14 +15,8 @@ const ListOfCharacters = ({
 }) => {
   // Renderizes our characters.
 
-  // ● Peso.
-  // ● Altura.
-  // ● Nombre.
-  // ● Alias.
-  // ● Color de ojos.
-  // ● Color de cabello.
-  // ● Lugar de trabajo
   const buildCharacter = (character, teamMember) => {
+    // Use this data in the details section
     const details = {
       alias: character.biography.aliases[0],
       height: character.appearance.height[0],
@@ -31,6 +25,8 @@ const ListOfCharacters = ({
       hair: character.appearance["hair-color"],
       workplace: character.work.base.split(" ")[0],
     };
+
+    //  Gets data related to a character and builds a card.
     return (
       <Character
         id={character.id}
@@ -50,11 +46,11 @@ const ListOfCharacters = ({
         }}
         teamMember={teamMember}
         biography={character.biography}
-        // showDetails={showDetails}
       />
     );
   };
 
+  //
   if (teamList) {
     return (
       <Row className="mx-1 d-flex justify-content-center">

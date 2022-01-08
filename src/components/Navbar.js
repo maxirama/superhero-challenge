@@ -7,6 +7,9 @@ import Context from "../context/AuthContext";
 export const Menu = () => {
   const auth = useContext(Context);
 
+  const handleClick = (e) => {
+    localStorage.setItem("superHeroToken", "");
+  };
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="text-light">
       <Container>
@@ -22,7 +25,9 @@ export const Menu = () => {
             </Nav.Link>
             <Nav.Link href="#">
               {auth ? (
-                <Link to="/login">Logout</Link>
+                <Link onClick={handleClick} to="/login">
+                  Logout
+                </Link>
               ) : (
                 <Link to="/login">Login</Link>
               )}

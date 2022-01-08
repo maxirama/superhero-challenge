@@ -1,10 +1,11 @@
-import React from "react";
+import { React, useContext } from "react";
 import { Formik, Form, Field, useFormik } from "formik";
 import * as Yup from "yup";
 import axios, { Axios } from "axios";
 import Menu from "../components/Navbar.js";
 import { Container, Row, Col, Stack } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
+import Context from "../context/AuthContext";
 
 /*Forms allows us to send (POST) information to the server to create something.*/
 /* Formik is a library that allows us to deal with forms in React. When dealing 
@@ -49,6 +50,7 @@ export default function Login() {
   };
 
   // Agregar logica de redireccion al submittear validamente
+  const auth = useContext(Context);
 
   return (
     <Container className="text-center my-3">
@@ -63,6 +65,7 @@ export default function Login() {
             Save the TOKEN in the local storage in this function.
           */
           saveToken(getToken(values));
+          location.reload(true);
         }}
         // Bind values to the HTML forms.
       >
