@@ -65,7 +65,6 @@ export default function Login() {
             Save the TOKEN in the local storage in this function.
           */
           saveToken(getToken(values));
-          location.reload(true);
         }}
         // Bind values to the HTML forms.
       >

@@ -19,7 +19,7 @@ function Searcher() {
   );
   // saveStatus: false === not saved , true === saved.
   const [saveStatus, setSaveStatus] = useState(false);
-  // const [showDetails, setShowDetails] = useState(false);
+
   // States:
   //The state's hooks allows us to update the state of certain component.
   const [searchValue, setSearchValue] = useState();
@@ -93,18 +93,9 @@ function Searcher() {
     localStorage.setItem("heroTeam", JSON.stringify(team));
   };
 
-  // const showHeroDetails = (character) => {
-  //   console.log(showDetails);
-  //   setShowDetails(!showDetails);
-  // };
-
   const handleChange = (e) => {
     searchResults(e.target.value);
   };
-
-  // const handlePreviewClick = (e) => {
-  //   setShowPreview(!showPreview);
-  // };
 
   //To Do: Pop up de falta de permisos / redireccion
   // Check if user is logged in:
