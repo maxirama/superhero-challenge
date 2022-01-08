@@ -34,8 +34,8 @@ const Character = ({
   // Conditional rendering to show the alignment of the hero.
   const border =
     biography.alignment === "good"
-      ? "border rounded border-success"
-      : "border rounded border-danger";
+      ? "border-3 rounded border-primary"
+      : "border-3 rounded border-danger";
 
   // Card that shows the member of the team and his stats.
   const memberStats = (

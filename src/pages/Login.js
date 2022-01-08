@@ -1,11 +1,12 @@
-import { React, useContext } from "react";
+import { React, useContext, useEffect } from "react";
 import { Formik, Form, Field, useFormik } from "formik";
 import * as Yup from "yup";
 import axios, { Axios } from "axios";
 import Menu from "../components/Navbar.js";
 import { Container, Row, Col, Stack } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
+import { Navigate, useHistory } from "react-router-dom";
 import Context from "../context/AuthContext";
+import { render } from "@testing-library/react";
 
 /*Forms allows us to send (POST) information to the server to create something.*/
 /* Formik is a library that allows us to deal with forms in React. When dealing 
@@ -47,64 +48,74 @@ export default function Login() {
         //  Add error managment.
         console.log(error);
       });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   // Agregar logica de redireccion al submittear validamente
   const auth = useContext(Context);
 
-  return (
-    <Container className="text-center my-3">
-      <Formik
-        initialValues={{
-          email: "",
-          password: "",
-        }}
-        validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          /*
+  if (auth) {
+    return <Navigate to="/home" />;
+  }
+  // const history = useHistory();
+  if (!auth) {
+    return (
+      <Container className="text-center my-3">
+        <Formik
+          initialValues={{
+            email: "",
+            password: "",
+          }}
+          validationSchema={SignupSchema}
+          onSubmit={(values) => {
+            /*
             Save the TOKEN in the local storage in this function.
           */
-          saveToken(getToken(values));
-        }}
-        // Bind values to the HTML forms.
-      >
-        {({ errors, touched }) => (
-          <Stack
-            gap={4}
-            className=" my-5 col-md-4 mx-auto shadow-lg border rounded"
-          >
-            <h1 className="my-2">Login</h1>
-            <Form>
-              <Container className="d-flex justify-content-center mx-2  py-1">
-                <label className="d-block mx-2 px-3" htmlFor="email">
-                  Email{" "}
-                </label>
-                <div className="">
-                  <Field className="" name="email" />
-                  {errors.email && touched.email ? (
-                    <div className="text-danger mx-2">{errors.email}</div>
-                  ) : null}
-                </div>
-              </Container>
-              <Container className="d-flex justify-content-center mx-2 py-1">
-                <label className="d-block mx-2" htmlFor="password">
-                  Password{" "}
-                </label>
-                <div className="">
-                  <Field className="" name="password" />
-                  {errors.password && touched.password ? (
-                    <div className="text-danger mx-2">{errors.password}</div>
-                  ) : null}
-                </div>
-              </Container>
+            return saveToken(getToken(values));
+          }}
+          // Bind values to the HTML forms.
+        >
+          {({ errors, touched }) => (
+            <Stack
+              gap={4}
+              className=" my-5 col-md-4 mx-auto shadow-lg border rounded"
+            >
+              <h1 className="my-2">Login</h1>
+              <Form>
+                <Container className="d-flex justify-content-center mx-2  py-1">
+                  <label className="d-block mx-2 px-3" htmlFor="email">
+                    Email{" "}
+                  </label>
+                  <div className="">
+                    <Field className="" name="email" />
+                    {errors.email && touched.email ? (
+                      <div className="text-danger mx-2">{errors.email}</div>
+                    ) : null}
+                  </div>
+                </Container>
+                <Container className="d-flex justify-content-center mx-2 py-1">
+                  <label className="d-block mx-2" htmlFor="password">
+                    Password{" "}
+                  </label>
+                  <div className="">
+                    <Field className="" name="password" />
+                    {errors.password && touched.password ? (
+                      <div className="text-danger mx-2">{errors.password}</div>
+                    ) : null}
+                  </div>
+                </Container>
 
-              <button className="btn btn-primary my-4 px-5" type="submit">
-                Submit
-              </button>
-            </Form>
-          </Stack>
-        )}
-      </Formik>
-    </Container>
-  );
+                <button className="btn btn-primary my-4 px-5" type="submit">
+                  Submit
+                </button>
+              </Form>
+            </Stack>
+          )}
+        </Formik>
+      </Container>
+    );
+  }
 }

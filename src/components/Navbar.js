@@ -9,6 +9,7 @@ export const Menu = () => {
 
   const handleClick = (e) => {
     localStorage.setItem("superHeroToken", "");
+    window.location.reload();
   };
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="text-light">

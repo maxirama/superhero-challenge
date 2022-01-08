@@ -3,6 +3,7 @@ import ListOfCharacters from "../components/ListOfCharacters";
 import { Container } from "react-bootstrap";
 import Context from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
+import AverageCard from "../components/AverageCard";
 
 function Home() {
   const [team, setTeam] = useState(
@@ -29,18 +30,39 @@ function Home() {
       durability: 0,
       power: 0,
       combat: 0,
+      height: 0,
+      weight: 0,
     };
 
-    let currentStat = [];
     team.forEach((hero) => {
       teamStats.push(Object.entries(hero.powerstats));
     });
 
     teamStats.forEach((hero) => {
-      hero.forEach((stat) => {});
-      // currentStat = hero[0].split(",");
-      // console.log(`hero[0]: ${hero[0]} , hero[1]: 0`);
+      hero.forEach((stat) => {
+        const [key, value] = stat;
+        totalStats[key] += parseInt(value);
+      });
     });
+
+    const getParsedValue = (hero, value) => {
+      return parseInt(hero.appearance[value][1]);
+    };
+
+    team.forEach((hero) => {
+      console.log(getParsedValue(hero, "height"));
+      totalStats.height += getParsedValue(hero, "height");
+      totalStats.weight += getParsedValue(hero, "weight");
+    });
+
+    for (let stat in totalStats) {
+      // if (stat === "weight") {
+      //   totalStats[stat] = `${parseInt((totalStats[stat] /= team.weight))} kg`;
+      // }
+      totalStats[stat] /= team.length;
+    }
+
+    console.log(totalStats);
     return totalStats;
   };
 
@@ -50,15 +72,21 @@ function Home() {
     return <Navigate to="/login" />;
   }
 
+  const averageStats = averagePowerstats();
   if (auth) {
-    console.log(averagePowerstats());
+    console.log(`average Stats 
+      ${averageStats}`);
     return (
       <>
         <Container className="my-2">
           <Container className="d-flex flex-column py-3">
             <h1 className="text-center py-3">Welcome to SuperHero Teams</h1>
             <h2 className="py-3 mx-4">Average powerstats</h2>
-            <Container></Container>
+
+            <Container className="mx-1 d-flex justify-content-center row">
+              <AverageCard stats={averageStats}></AverageCard>
+            </Container>
+
             <h2 className="py-3 mx-4"> Your Team </h2>
             {team.length !== 0 ? (
               <ListOfCharacters
